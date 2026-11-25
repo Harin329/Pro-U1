@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { createClient } from "@/lib/supabase";
 import { RoundLogger } from "@/components/round-logger";
 
@@ -153,6 +155,17 @@ function RecentRounds({ rounds }: { rounds: Round[] }) {
   );
 }
 
+function CoursePickerLink() {
+  return (
+    <Link
+      href="/course-picker"
+      className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+    >
+      🎲 Pick a random course
+    </Link>
+  );
+}
+
 function SetupNotice() {
   return (
     <section className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900 dark:border-amber-300/30 dark:bg-amber-950/40 dark:text-amber-100">
@@ -171,7 +184,10 @@ export default async function Home() {
   if (!supabase) {
     return (
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 md:px-6 md:py-10">
-        <h1 className="mb-6 text-3xl font-bold tracking-tight">Golf Ball Dashboard</h1>
+        <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <h1 className="text-3xl font-bold tracking-tight">Golf Ball Dashboard</h1>
+          <CoursePickerLink />
+        </header>
         <SetupNotice />
       </main>
     );
@@ -207,11 +223,14 @@ export default async function Home() {
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 md:px-6 md:py-10">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">Golf Ball Dashboard</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-          Track which ball performs best across score, fairways, greens, and putting.
-        </p>
+      <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Golf Ball Dashboard</h1>
+          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
+            Track which ball performs best across score, fairways, greens, and putting.
+          </p>
+        </div>
+        <CoursePickerLink />
       </header>
 
       {(ballStatsError || roundsError || ballsError) && (

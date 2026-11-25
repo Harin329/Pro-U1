@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "golf:refresh-courses": "node --no-warnings scripts/golf/build-region-index.mts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.1",
